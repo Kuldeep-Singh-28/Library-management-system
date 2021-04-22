@@ -36,6 +36,13 @@ def getStarted():
     return render_template('getStarted.html')
 
 
+@app.route('/user/profile', methods=['GET', 'POST'])
+def profile():
+  if 'uid' not in session:
+    return render_template('other/not_logged_in.html')
+  return render_template('user/profile.html', name = session['name'])
+
+
 
 # librarian
 app.add_url_rule('/librarian/login', view_func=librarian_section.librarian_login, methods=['GET','POST'])

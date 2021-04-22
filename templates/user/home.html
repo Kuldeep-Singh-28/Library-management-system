@@ -1,93 +1,460 @@
-{% extends 'baseuser.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block body %}
-<div class="container">
-  <div class="left">
-    <div class="card" style="width: 60%">
-      <div class="card-body">
-        <h5 class="card-title">FINES</h5>
-        <p class="card-text">Your fine- ₹{{userDetails[2]}}</p>
-        {% if(userDetails[2]==0.00) %}
-        <a class="card-link">No Fines due</a>
-        {% else %}
-        <a href="#" class="card-link">Pay Fines</a>
-        {% endif %}
+
+{% block head %}
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="E-Library." />
+  <meta name="author" content="Creative Tim" />
+  <title>E-Library User</title>
+  <!-- Favicon -->
+  <link rel="icon" href="../../static/user_assets/img/brand/favicon.png" type="image/png" />
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="../../static/user_assets/vendor/nucleo/css/nucleo.css" type="text/css" />
+  <link rel="stylesheet" href="../../static/user_assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
+    type="text/css" />
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="../../static/user_assets/css/argon.css?v=1.2.0" type="text/css" />
+</head>
+{% endblock %}
+
+<body>
+
+
+  {% block nav %}
+  <nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+      <!-- Brand -->
+      <div class="sidenav-header align-items-center">
+        <a class="navbar-brand font-weight-bolder text-purple" href="/user/home">E-Library
+        </a>
+      </div>
+      <div class="navbar-inner">
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+          <!-- Nav items -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/user/home">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Dashboard</span>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/user/profile">
+                <i class="ni ni-single-02 text-yellow"></i>
+                <span class="nav-link-text">Profile</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/bookshelves">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="nav-link-text">Book Shelves</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/lists">
+                <i class="ni ni-bullet-list-67 text-default"></i>
+                <span class="nav-link-text">Reading Lists</span>
+              </a>
+            </li>
+
+
+          </ul>
+          <!-- Divider -->
+          <hr class="my-3" />
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/user/friends">
+                <i class="ni ni-circle-08 text-pink"></i>
+                <span class="nav-link-text">Friends</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/books/home">
+                <i class="ni ni-circle-08 text-pink"></i>
+                <span class="nav-link-text">Book Store</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-    <hr style="width: 80%; margin-left: 0" />
-    <div>
-      <h5 style="margin-left: 4px">Bookshelves</h5>
-      <table class="bookshelves">
-        {% for i in range(bookshelves|length) %}
-        <tr>
-          <td>{{bookshelves[i][0]}}</td>
-          <td>{{bookshelves[i][1]}}</td>
-        </tr>
-        {% endfor %}
-      </table>
+  </nav>
+  {% endblock %}
+  <!-- Sidenav -->
+  {% block body %}
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Search form -->
+
+          <!-- Navbar links -->
+          <ul class="navbar-nav align-items-center ml-md-auto">
+            <li class="nav-item d-xl-none">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                data-target="#sidenav-main">
+                <div class="sidenav-toggler-inner">
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                </div>
+              </div>
+            </li>
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="ni ni-ungroup"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default dropdown-menu-right">
+                <div class="row shortcuts px-4">
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
+                      <i class="ni ni-calendar-grid-58"></i>
+                    </span>
+                    <small>Calendar</small>
+                  </a>
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
+                      <i class="ni ni-email-83"></i>
+                    </span>
+                    <small>Email</small>
+                  </a>
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
+                      <i class="ni ni-credit-card"></i>
+                    </span>
+                    <small>Payments</small>
+                  </a>
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
+                      <i class="ni ni-books"></i>
+                    </span>
+                    <small>Reports</small>
+                  </a>
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
+                      <i class="ni ni-pin-3"></i>
+                    </span>
+                    <small>Maps</small>
+                  </a>
+                  <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
+                      <i class="ni ni-basket"></i>
+                    </span>
+                    <small>Shop</small>
+                  </a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="navbar-nav align-items-center ml-auto ml-md-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder" src="../../static/user_assets/img/theme/team-1.jpg" />
+                  </span>
+                  <div class="media-body ml-2 d-none d-lg-block">
+                    <span class="mb-0 text-sm font-weight-bold">{{name}}</span>
+                  </div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header noti-title">
+                  <h6 class="text-overflow m-0">Welcome!</h6>
+                </div>
+                <a href="/user/profile" class="dropdown-item">
+                  <i class="ni ni-single-02"></i>
+                  <span>My profile</span>
+                </a>
+                <a href="#!" class="dropdown-item">
+                  <i class="ni ni-settings-gear-65"></i>
+                  <span>Settings</span>
+                </a>
+
+
+                <div class="dropdown-divider"></div>
+                <a href="/getStarted" class="dropdown-item">
+                  <i class="ni ni-user-run"></i>
+                  <span>Logout</span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Header -->
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                  <li class="breadcrumb-item">
+                    <a href="#"><i class="fas fa-home"></i></a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="/user/home">Dashboards</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Default
+                  </li>
+                </ol>
+              </nav>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">{{name}}</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">Money</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Due</th>
+                    <th scope="col" class="text-center">Amount</th>
+                  </tr>
+                  <tr></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><img src="./../../static/user_assets/img/img_avatar/money.png" alt=""></th>
+                    <td><strong>₹{{userDetails[2]}}</strong> </td>
+                    <td class="text-center">
+                      <div class=" d-flex align-items-center">
+                        <div class="col">
+                          {% if(userDetails[2]==0.00) %}
+                          <a href="#!" class="btn btn-sm btn-success"> No Pay</a>
+                          {% else %}
+                          <a href="#!" class="btn btn-sm btn-primary">Pay</a>
+                          {% endif %}
+
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Book shelves</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">see all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Shelve</th>
+                    <th></th>
+                  </tr>
+                  <tr></tr>
+                </thead>
+                <tbody>
+                  {% for i in range(bookshelves|length) %}
+                  <tr>
+                    <th scope="row"><img class="w-25" src="./../../static/assets/img/Extra_images/bookstore.png" alt="">
+                    </th>
+
+                    <td>{{bookshelves[i][0]}}</td>
+                    <td>{{bookshelves[i][1]}}</td>
+                  </tr>
+                  {% endfor %}
+
+                  <tr>
+                    <th scope="row"></th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row">
+
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Issued Books</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col" class="text-center">Copy Number</th>
+                    <th scope="col">Issue Date</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Return</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in range(issued|length) %}
+                  <tr scope="row">
+                    <td class="font-weight-bolder">{{issued[i][0]}}</td>
+                    <td>{{issued[i][1]}}</td>
+                    <td>{{issued[i][2]}}</td>
+                    <td class="text-center">{{issued[i][3]}}</td>
+                    <td>{{issued[i][4]}}</td>
+                    <td>{{issued[i][5]}}</td>
+                    <td>{% if(issued[i][6]=='issued') %}
+                      <form method="POST">
+                        <input type='text' id='isbn' name='isbn' value='{{ issued[i][0] }}' hidden>
+                        <input type='text' id='type' name='type' value='Request Return' hidden>
+                        <input type='submit' class="btn btn-success" value='Return'>
+                      </form>
+                      {% else %}
+                      Return Requested
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-xl-12">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Hold Books</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">See all</a>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Author</th>
+                    <th scope="col" class="text-center">Hold Date </th>
+                    <th scope="col">Status</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for i in range(holds|length) %}
+                  <tr scope="row">
+                    <td class="font-weight-bolder">{{holds[i][0]}}</td>
+                    <td>{{holds[i][1]}}</td>
+                    <td>{{holds[i][2]}}</td>
+                    <td class="text-center">{{holds[i][3]}}</td>
+                    <td>{{holds[i][4]}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center text-lg-left text-muted">
+              &copy; 2021
+              <a href="https://iiti.ac.in" class="font-weight-bold ml-1" target="_blank">IIT Indore</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </div>
-  <div class="right">
-    <section>
-      <h4>Issued Books</h4>
-      <table>
-        <thead>
-          <th>ISBN</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Copy Number</th>
-          <th>Issue Date</th>
-          <th>Due Date</th>
-          <th>Return</th>
-        </thead>
-        <tbody>
-          {% for i in range(issued|length) %}
-          <tr>
-            <td>{{issued[i][0]}}</td>
-            <td>{{issued[i][1]}}</td>
-            <td>{{issued[i][2]}}</td>
-            <td>{{issued[i][3]}}</td>
-            <td>{{issued[i][4]}}</td>
-            <td>{{issued[i][5]}}</td>
-            <td>{% if(issued[i][6]=='issued') %}
-              <form method="POST">
-                <input type='text' id='isbn' name='isbn' value='{{ issued[i][0] }}' hidden>
-                <input type='text' id='type' name='type' value='Request Return' hidden>
-                <input type='submit' value='Return'>
-              </form>
-              {% else %}
-              Return Requested
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </section>
-    <hr style="height: 5px" />
-    <section>
-      <h4>Holds</h4>
-      <table width="70%">
-        <thead>
-          <th>ISBN</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Hold Date</th>
-          <th>Status</th>
-        </thead>
-        <tbody>
-          {% for i in range(holds|length) %}
-          <tr>
-            <td>{{holds[i][0]}}</td>
-            <td>{{holds[i][1]}}</td>
-            <td>{{holds[i][2]}}</td>
-            <td>{{holds[i][3]}}</td>
-            <td>{{holds[i][4]}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </section>
-  </div>
-</div>
-{% endblock %}
+
+  {% endblock %}
+
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  {% block script %}
+  <script src="../../static/user_assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../../static/user_assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../static/user_assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="../../static/user_assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="../../static/user_assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="../../static/user_assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="../../static/user_assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="../../static/user_assets/js/argon.js?v=1.2.0"></script>
+  {% endblock %}
+
+</body>
+
+</html>
